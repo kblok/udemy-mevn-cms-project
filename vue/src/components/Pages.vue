@@ -1,19 +1,18 @@
 <template>
-  <div class="row">
-    <div class="col-3">
-      Categories
-    </div>
+  <div class="row mt-3">
+    <CategoryList/>
     <div class="col-9">
-      {{ pageContent}}
+      {{ pageContent }}
     </div>
   </div>
-
 </template>
 
 <script>
 import { mapState } from "vuex";
+import CategoryList from "./CategoryList"
 
 export default {
+  components: { CategoryList },
   computed: {
     ...mapState(["pages"]),
     pageContent() {
