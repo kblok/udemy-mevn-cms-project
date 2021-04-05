@@ -21,16 +21,18 @@
           </p>
         </div>
       </div>
+      <ProductPagination/>
     </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from "vuex";
-import CategoryList from "./CategoryList"
+import CategoryList from "./CategoryList";
+import ProductPagination from "./ProductPagination";
 
 export default {
-  components: { CategoryList },
+  components: { CategoryList, ProductPagination },
   computed: {
     ...mapState(['products', 'productImages'])
   },

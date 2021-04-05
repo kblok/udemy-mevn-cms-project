@@ -18,4 +18,15 @@ router.get('/:category', (req, res) => {
     });
 });
 
+router.get('/count/:category', (req, res) => {
+    const cat = req.params.category;
+
+    if (cat === 'all') { 
+        Product.countDocuments({}, (error, count) => res.json(count));
+    } else  {
+        Product.countDocuments({ category: cat }, (error, count) => res.json(count));
+    }
+});
+
+
 module.exports = router;

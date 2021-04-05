@@ -17,6 +17,9 @@ export default new Vuex.Store({
         categories: [],
         products: [],
         productImages: productImagesUrl,
+        currentPage: 1,
+        pageCount: 0,
+        pageSize: 4,
     },
     mutations: {
         setPages(state, pages) {
@@ -27,6 +30,9 @@ export default new Vuex.Store({
         },
         setProducts(state, products) {
             state.products = products;
+        },
+        setPageCount(state, count) {
+            state.pageCount = Math.ceil(Number(count) / state.pageSize);
         }
     },
     actions: {
@@ -38,13 +44,19 @@ export default new Vuex.Store({
         },
         async setProductsByCategoryAction(context, category) {
             let url;
+            let productCountUrl;
 
             if(category != 'all') {
                 url =`${productsUrl}/${category}`;
+                productCountUrl =`${productsUrl}/count/${category}`;
             } else {
                 url = productsUrl;
+                productCountUrl =`${productsUrl}/count/all`;
             }
 
+            const productCount = (await Axios.get(productCountUrl)).data;
+
+            context.commit('setPageCount', productCount);
             context.commit('setProducts', (await Axios.get(url)).data);
         }
     }
