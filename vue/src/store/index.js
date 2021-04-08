@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import Axios from "axios";
+import CartModule from './cart';
 
 Vue.use(Vuex);
 
@@ -12,6 +13,9 @@ const productImagesUrl = `${baseUrl}/media/products/`;
 
 export default new Vuex.Store({
     strict: true,
+    modules: {
+        cart: CartModule
+    },
     state: {
         pages: [],
         categories: [],

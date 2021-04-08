@@ -17,7 +17,7 @@
             {{ p.price | currency }}
           </p>
           <p>
-            <button class="btn btn-primary">Add to cart</button>
+            <button class="btn btn-primary" @click="handleAddProduct(p)" >Add to cart</button>
           </p>
         </div>
       </div>
@@ -38,7 +38,13 @@ export default {
   },
   methods: {
     ...mapActions(['setProductsByCategoryAction']),
-    ...mapMutations(['setCurrentCategory', 'setCurrentPage'])
+    ...mapMutations(['setCurrentCategory', 'setCurrentPage']),
+    ...mapMutations({
+      addProduct: 'cart/addProduct',
+    }),
+    handleAddProduct(product) {
+      this.addProduct(product);
+    }
   },
   created() {
     this.setCurrentPage(1);

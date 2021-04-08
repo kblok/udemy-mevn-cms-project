@@ -15,8 +15,8 @@
         @click="getProducts(p)"
       >
         <button
-          class="btn btn-secondary mx-1"
-          :class="[i + 1] == currentPage ? 'btn-primary' : 'btn-secondary'"
+          class="btn mx-1"
+          :class="p == currentPage ? 'btn-primary' : 'btn-secondary'"
         >
           {{ p }}
         </button>
