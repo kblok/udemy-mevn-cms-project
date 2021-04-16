@@ -58,10 +58,9 @@
 <script>
 import { mapGetters, mapState } from "vuex";
 import CategoryList from "./CategoryList";
-import Header from "./Header.vue";
 
 export default {
-  components: { CategoryList, Header },
+  components: { CategoryList },
   computed: {
     ...mapState({ cart: (state) => state.cart.cart }),
     ...mapGetters({
