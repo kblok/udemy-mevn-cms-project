@@ -21,9 +21,9 @@
             <td>{{ c.product.name }}</td>
             <td>{{ c.quantity }}</td>
             <td>
-              <button class="btn small btn-primary mx-1">+</button>
-              <button class="btn small btn-warning mx-1">-</button>
-              <button class="btn small btn-danger mx-1">remove</button>
+              <button class="btn small btn-primary mx-1" @click="handleAddProduct(c.product)">+</button>
+              <button class="btn small btn-warning mx-1" @click="handleSubstractProduct(c.product)">-</button>
+              <button class="btn small btn-danger mx-1" @click="handleRemoveProduct(c.product)">remove</button>
             </td>
             <td>{{ c.product.price | currency }}</td>
             <td>{{ (c.product.price * c.quantity) | currency }}</td>
@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from "vuex";
+import { mapGetters, mapMutations, mapState } from "vuex";
 import CategoryList from "./CategoryList";
 
 export default {
@@ -68,5 +68,21 @@ export default {
       totalPrice: "cart/totalPrice",
     }),
   },
+  methods: {
+    ...mapMutations({
+      addProduct: 'cart/addProduct',
+      substractProduct: 'cart/substractProduct',
+      removeProduct: 'cart/removeProduct',
+    }),
+    handleAddProduct(product) {
+      this.addProduct(product);
+    },
+    handleSubstractProduct(product) {
+      this.substractProduct(product);
+    },
+    handleRemoveProduct(product) {
+      this.removeProduct(product);
+    },
+  }
 };
 </script>

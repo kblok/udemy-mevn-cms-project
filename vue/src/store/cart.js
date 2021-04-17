@@ -15,7 +15,25 @@ export default {
             if (cartItem != null) {
                 cartItem.quantity++;
             } else {
-                state.cart.push({ product: product, quantity: 1});
+                state.cart.push({ product: product, quantity: 1 });
+            }
+        },
+        substractProduct(state, product) {
+            const cartItem = state.cart.find(cartItem => cartItem.product._id == product._id);
+
+            if (cartItem.quantity === 1) {
+                const index = state.cart.findIndex(cartItem => cartItem.product._id == product._id);
+                if (index !== -1) {
+                    state.cart.splice(index, 1);
+                }
+            } else if (cartItem != null) {
+                cartItem.quantity--;
+            }
+        },
+        removeProduct(state, product) {
+            const index = state.cart.findIndex(cartItem => cartItem.product._id == product._id);
+            if (index !== -1) {
+                state.cart.splice(index, 1);
             }
         },
         setCartData(state, data) {
@@ -25,8 +43,8 @@ export default {
     actions: {
         loadCartData(context) {
             const data = localStorage.getItem('cart');
-            
-            if(data) {
+
+            if (data) {
                 context.commit('setCartData', JSON.parse(data));
             }
         },
@@ -37,7 +55,7 @@ export default {
             context.dispatch('loadCartData');
             store.watch(state => state.cart.cart,
                 () => context.dispatch('storeCartData'),
-                 { deep: true});
+                { deep: true });
         }
     }
 }
