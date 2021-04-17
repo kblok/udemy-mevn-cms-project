@@ -56,6 +56,9 @@ export default {
             store.watch(state => state.cart.cart,
                 () => context.dispatch('storeCartData'),
                 { deep: true });
+        },
+        clearCartData(context) {
+            context.commit('setCartData', []);
         }
     }
 }

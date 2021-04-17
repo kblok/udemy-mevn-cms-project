@@ -21,9 +21,24 @@
             <td>{{ c.product.name }}</td>
             <td>{{ c.quantity }}</td>
             <td>
-              <button class="btn small btn-primary mx-1" @click="handleAddProduct(c.product)">+</button>
-              <button class="btn small btn-warning mx-1" @click="handleSubstractProduct(c.product)">-</button>
-              <button class="btn small btn-danger mx-1" @click="handleRemoveProduct(c.product)">remove</button>
+              <button
+                class="btn small btn-primary mx-1"
+                @click="handleAddProduct(c.product)"
+              >
+                +
+              </button>
+              <button
+                class="btn small btn-warning mx-1"
+                @click="handleSubstractProduct(c.product)"
+              >
+                -
+              </button>
+              <button
+                class="btn small btn-danger mx-1"
+                @click="handleRemoveProduct(c.product)"
+              >
+                remove
+              </button>
             </td>
             <td>{{ c.product.price | currency }}</td>
             <td>{{ (c.product.price * c.quantity) | currency }}</td>
@@ -37,7 +52,12 @@
           </tr>
           <tr>
             <td colspan="5">
-              <button class="btn btn-danger float-left">Clear Cart</button>
+              <button
+                class="btn btn-danger float-left"
+                @click="handleClearCart()"
+              >
+                Clear Cart
+              </button>
               <router-link to="/checkout" class="btn btn-primary float-right"
                 >checkout</router-link
               >
@@ -56,7 +76,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapState } from "vuex";
+import { mapActions, mapGetters, mapMutations, mapState } from "vuex";
 import CategoryList from "./CategoryList";
 
 export default {
@@ -70,9 +90,12 @@ export default {
   },
   methods: {
     ...mapMutations({
-      addProduct: 'cart/addProduct',
-      substractProduct: 'cart/substractProduct',
-      removeProduct: 'cart/removeProduct',
+      addProduct: "cart/addProduct",
+      substractProduct: "cart/substractProduct",
+      removeProduct: "cart/removeProduct",
+    }),
+    ...mapActions({
+      clearCartData: "cart/clearCartData",
     }),
     handleAddProduct(product) {
       this.addProduct(product);
@@ -83,6 +106,9 @@ export default {
     handleRemoveProduct(product) {
       this.removeProduct(product);
     },
-  }
+    handleClearCart() {
+      this.clearCartData();
+    },
+  },
 };
 </script>
