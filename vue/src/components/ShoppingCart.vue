@@ -59,7 +59,7 @@
                 Clear Cart
               </button>
               <router-link to="/checkout" class="btn btn-primary float-right"
-                >checkout</router-link
+                >Checkout</router-link
               >
             </td>
           </tr>
